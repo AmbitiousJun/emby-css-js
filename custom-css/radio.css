@@ -1,0 +1,25 @@
+/* emby4.8 web端播放页修改 音量与右下控件位置 */
+@media (min-width:860px) {
+    .view-videoosd-videoosd.darkContentContainer.graphicContentContainer 
+    .videoOsdBottom-buttons-topright {
+        position: absolute;
+        right: 1em;
+        bottom: 2em;
+        z-index:114514 !important;
+    }
+    .view-videoosd-videoosd.darkContentContainer.graphicContentContainer 
+    .videoOsdVolumeControls-bottom {
+        display: inline-flex !important;
+        position: absolute !important;
+        right: 21em; /* 音量条位置 */
+        width:18em; /* 音量条长度 */
+        z-index:11451 !important;
+        user-select: none;
+    }
+    .view-videoosd-videoosd.darkContentContainer.graphicContentContainer 
+    .osdVolumeDisplayIcon {
+        color:#ffffffed;
+    }
+    /* 右上角隐藏音量条*/
+    .skinHeader.headroom-scrolling .videoOsdVolumeSliderWrapper-top.flex-grow {display:none}
+}
