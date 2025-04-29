@@ -577,11 +577,12 @@ class HomeSwiper {
 					},
 					reachEnd: function (swiper) {
 						if (swiper.initialized) {
-							swiper.slideTo(0);
 							// swiper.autoplay.stop();
-							// this.swiper2Delay = setTimeout(() => {
-							// 	this.swiper2.slideNext();
-							// }, 20e3);
+							this.swiper2Delay = setTimeout(() => {
+								// this.swiper2.slideNext();
+								swiper.slideTo(0);
+								swiper.autoplay.start();
+							}, 20e3);
 							// this.swiperDelay = setTimeout(() => {
 							// 	swiper.slideTo(0);
 							// 	swiper.disable();
