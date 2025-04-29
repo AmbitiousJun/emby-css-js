@@ -281,7 +281,6 @@ class HomeSwiper {
 
 			for (let i = 0; i < libdataitem.length; ++i) {
 				let libitem = libdataitem[i];
-				console.log(`libitem ctype: ${libitem.CollectionType}`);
 				if (libitem.CollectionType && libitem.CollectionType === "homevideos") {
 					this.itemQuery.ImageTypes = "Primary";
 				} else {
@@ -498,6 +497,8 @@ class HomeSwiper {
 					};
 				},
 				breakpoint: function (swiper) {
+
+					console.log(`111 slidesPerView: ${swiper.params.slidesPerView}`);
 
 					if (swiper.params.slidesPerView > this.Alldata.length) {
 						swiper.params.loop = false;
