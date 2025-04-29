@@ -298,8 +298,10 @@ class HomeSwiper {
 					// });
 				}
 				dataquery.Items.length > this.showItemNum && (dataquery.Items = this.getRandomArrayElements(dataquery.Items, this.showItemNum));
+				// dataquery.Items.length !== 0 &&
+				// 	Alldata.push({ Id: libitem.Id, Name: libitem.Name, ImageTags: libitem.ImageTags, CollectionType: libitem.CollectionType, data: dataquery.Items });
 				dataquery.Items.length !== 0 &&
-					Alldata.push({ Id: libitem.Id, Name: libitem.Name, ImageTags: libitem.ImageTags, CollectionType: libitem.CollectionType, data: dataquery.Items });
+				    Alldata.push({ Id: libitem.Id, data: dataquery.Items });
 			}
 
 			const data = JSON.stringify(Alldata);
