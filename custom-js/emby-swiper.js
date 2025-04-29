@@ -23,7 +23,7 @@ class HomeSwiper {
 	static start() {
         CommonUtils.cleanCacheEveryDay();
 
-		this.itemQuery = { ImageTypes: "Primary,Backdrop", EnableImageTypes: "Primary,Backdrop,Banner,Logo", IncludeItemTypes: "Movie,Series,Photo", SortBy: "ProductionYear, PremiereDate, SortName", Recursive: true, ImageTypeLimit: 1, Limit: 10, Fields: "Taglines,Overview,ParentId", SortOrder: "Descending", EnableUserData: true, EnableTotalRecordCount: false };
+		this.itemQuery = { ImageTypes: "Primary,Backdrop", EnableImageTypes: "Primary,Backdrop,Banner,Logo", IncludeItemTypes: "Movie,Series,Photo", SortBy: "PremiereDate, ProductionYear, SortName", Recursive: true, ImageTypeLimit: 1, Limit: 10, Fields: "Taglines,Overview,ParentId", SortOrder: "Descending", EnableUserData: true, EnableTotalRecordCount: false };
 		this.backdropOptions = { type: "Backdrop", maxWidth: 3000, adjustForPixelRatio: false };
 		this.logoOptions = { type: "Logo", maxWidth: 500, adjustForPixelRatio: false };
 		this.coverOptions = { type: "Primary", maxWidth: 1000, adjustForPixelRatio: false };
