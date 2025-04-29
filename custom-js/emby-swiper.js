@@ -498,8 +498,6 @@ class HomeSwiper {
 				},
 				breakpoint: function (swiper) {
 
-					console.log(`111 slidesPerView: ${swiper.params.slidesPerView}`);
-
 					if (swiper.params.slidesPerView > this.Alldata.length) {
 						swiper.params.loop = false;
 						swiper.wrapperEl.style["justify-content"] = "flex-end"
@@ -514,6 +512,7 @@ class HomeSwiper {
 							let src1 = element.getAttribute("src");
 							if (src1.includes("Backdrop")) {
 								let id = element.getAttribute("id");
+								console.log(`111 banner cover, parentid: ${parentid}, alldata: ${this.Alldata}`);
 								let parentid = element.getAttribute("data-parentid");
 								let item = this.Alldata.filter(m => m.Id === parentid)[0].data.filter(m => m.Id === id)[0];
 								let src2 = src1.replace("Backdrop", "Primary").replace(item.BackdropImageTags[0], item.ImageTags.Primary);
