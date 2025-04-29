@@ -282,15 +282,16 @@ class HomeSwiper {
 					this.itemQuery.ImageTypes = "Backdrop";
 				}
 				this.itemQuery.ParentId = libitem.Id;
+				console.log(`lib parent id: ${libitem.Id}`);
 				let dataquery = await this.getItems(this.itemQuery);
 				if (dataquery.Items.length === 0) {
 					/* 查询结果为空的媒体库，随机全库。如果不需要，就注释掉下方一条语句。*/
-					dataquery = await this.getItems({
-						ImageTypes: "Backdrop", EnableImageTypes: "Primary,Backdrop,Banner,Logo",
-						IncludeItemTypes: "Movie,Series", SortBy: "Random",
-						Recursive: true, ImageTypeLimit: 1, Limit: this.itemQuery.Limit, Fields: "Taglines,Overview",
-						EnableUserData: true, EnableTotalRecordCount: false
-					});
+					// dataquery = await this.getItems({
+					// 	ImageTypes: "Backdrop", EnableImageTypes: "Primary,Backdrop,Banner,Logo",
+					// 	IncludeItemTypes: "Movie,Series", SortBy: "Random",
+					// 	Recursive: true, ImageTypeLimit: 1, Limit: this.itemQuery.Limit, Fields: "Taglines,Overview",
+					// 	EnableUserData: true, EnableTotalRecordCount: false
+					// });
 				}
 				dataquery.Items.length > this.showItemNum && (dataquery.Items = this.getRandomArrayElements(dataquery.Items, this.showItemNum));
 				dataquery.Items.length !== 0 &&
