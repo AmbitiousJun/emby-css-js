@@ -277,7 +277,7 @@ class HomeSwiper {
 			let Alldata = [];
 
 			let dataQuery = await this.getItems(this.itemQuery) || [];
-			dataQuery.Items.length !== 0 && Alldata.push({ data: dataquery.Items });
+			dataQuery.Items.length !== 0 && Alldata.push({ data: dataQuery.Items });
 
 			// for (let i = 0; i < libdataitem.length; ++i) {
 			// 	let libitem = libdataitem[i]
