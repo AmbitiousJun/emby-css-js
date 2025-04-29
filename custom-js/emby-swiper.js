@@ -280,7 +280,8 @@ class HomeSwiper {
 			// dataQuery.Items.length !== 0 && Alldata.push({ data: dataQuery.Items, Id: 0 });
 
 			for (let i = 0; i < libdataitem.length; ++i) {
-				let libitem = libdataitem[i]
+				let libitem = libdataitem[i];
+				console.log(`libitem ctype: ${libitem.CollectionType}`);
 				if (libitem.CollectionType && libitem.CollectionType === "homevideos") {
 					this.itemQuery.ImageTypes = "Primary";
 				} else {
