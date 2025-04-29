@@ -16,6 +16,7 @@ class CommonUtils {
 		}
 		// 移除缓存
         Object.keys(localStorage).filter(k => k.startsWith('CACHE')).forEach(k => localStorage.removeItem(k));
+        Object.keys(sessionStorage).filter(k => k.startsWith('CACHE')).forEach(k => sessionStorage.removeItem(k));
         localStorage.setItem(keyName, today);
 	}
 }
