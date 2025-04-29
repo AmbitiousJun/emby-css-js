@@ -253,7 +253,7 @@ class HomeSwiper {
 		document.querySelectorAll(".view:not(.hide) .banner-item-play").forEach(async (dom, i) => {
 			let id = dom.getAttribute("id");
 			let parentid = dom.getAttribute("data-parentid");
-			const detail = this.Alldata.filter(m => m.Id === parentid)[0].data.filter(m => m.Id === id)[0];
+			const detail = this.Alldata.filter(m => m.Id === parentid)[0]?.data?.filter(m => m.Id === id)[0];
 			dom.addEventListener("click", () => {
 				let resume = {
 					startPositionTicks: detail.UserData["PlaybackPositionTicks"], ids: detail.Id, serverId: detail.ServerId, items: [detail]
@@ -745,7 +745,7 @@ class HomeSwiper {
 			}.bind(this);
 		}
 
-		this.playlistener();
+		// this.playlistener();
 		Emby.Page.setTitle("每日推荐");
 	}
 }
