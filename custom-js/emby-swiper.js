@@ -276,33 +276,33 @@ class HomeSwiper {
 			let libdataitem = this.user.Policy.EnableAllFolders ? libdata.Items : libdata.Items.filter(m => this.user.Policy.EnabledFolders.includes(m.Guid));
 			let Alldata = [];
 
-			// let dataQuery = await this.getItems(this.itemQuery) || [];
-			// dataQuery.Items.length !== 0 && Alldata.push({ data: dataQuery.Items, Id: 0 });
+			let dataQuery = await this.getItems(this.itemQuery) || [];
+			dataQuery.Items.length !== 0 && Alldata.push({ data: dataQuery.Items, Id: 0 });
 
-			for (let i = 0; i < libdataitem.length; ++i) {
-				let libitem = libdataitem[i];
-				if (libitem.CollectionType && libitem.CollectionType === "homevideos") {
-					this.itemQuery.ImageTypes = "Primary";
-				} else {
-					this.itemQuery.ImageTypes = "Backdrop";
-				}
-				this.itemQuery.ParentId = libitem.Id;
-				let dataquery = await this.getItems(this.itemQuery);
-				if (dataquery.Items.length === 0) {
-					/* 查询结果为空的媒体库，随机全库。如果不需要，就注释掉下方一条语句。*/
-					// dataquery = await this.getItems({
-					// 	ImageTypes: "Backdrop", EnableImageTypes: "Primary,Backdrop,Banner,Logo",
-					// 	IncludeItemTypes: "Movie,Series", SortBy: "Random",
-					// 	Recursive: true, ImageTypeLimit: 1, Limit: this.itemQuery.Limit, Fields: "Taglines,Overview",
-					// 	EnableUserData: true, EnableTotalRecordCount: false
-					// });
-				}
-				dataquery.Items.length > this.showItemNum && (dataquery.Items = this.getRandomArrayElements(dataquery.Items, this.showItemNum));
-				// dataquery.Items.length !== 0 &&
-				// 	Alldata.push({ Id: libitem.Id, Name: libitem.Name, ImageTags: libitem.ImageTags, CollectionType: libitem.CollectionType, data: dataquery.Items });
-				dataquery.Items.length !== 0 &&
-				    Alldata.push({ Id: libitem.Id, data: dataquery.Items });
-			}
+			// for (let i = 0; i < libdataitem.length; ++i) {
+			// 	let libitem = libdataitem[i];
+			// 	if (libitem.CollectionType && libitem.CollectionType === "homevideos") {
+			// 		this.itemQuery.ImageTypes = "Primary";
+			// 	} else {
+			// 		this.itemQuery.ImageTypes = "Backdrop";
+			// 	}
+			// 	this.itemQuery.ParentId = libitem.Id;
+			// 	let dataquery = await this.getItems(this.itemQuery);
+			// 	if (dataquery.Items.length === 0) {
+			// 		/* 查询结果为空的媒体库，随机全库。如果不需要，就注释掉下方一条语句。*/
+			// 		// dataquery = await this.getItems({
+			// 		// 	ImageTypes: "Backdrop", EnableImageTypes: "Primary,Backdrop,Banner,Logo",
+			// 		// 	IncludeItemTypes: "Movie,Series", SortBy: "Random",
+			// 		// 	Recursive: true, ImageTypeLimit: 1, Limit: this.itemQuery.Limit, Fields: "Taglines,Overview",
+			// 		// 	EnableUserData: true, EnableTotalRecordCount: false
+			// 		// });
+			// 	}
+			// 	dataquery.Items.length > this.showItemNum && (dataquery.Items = this.getRandomArrayElements(dataquery.Items, this.showItemNum));
+			// 	// dataquery.Items.length !== 0 &&
+			// 	// 	Alldata.push({ Id: libitem.Id, Name: libitem.Name, ImageTags: libitem.ImageTags, CollectionType: libitem.CollectionType, data: dataquery.Items });
+			// 	dataquery.Items.length !== 0 &&
+			// 	    Alldata.push({ Id: libitem.Id, data: dataquery.Items });
+			// }
 
 			const data = JSON.stringify(Alldata);
 			localStorage.setItem("CACHE|getLibItems" + ApiClient.getCurrentUserId() + "-" + ApiClient.serverId(), data);
