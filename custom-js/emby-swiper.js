@@ -277,7 +277,7 @@ class HomeSwiper {
 			let Alldata = [];
 
 			let dataQuery = await this.getItems(this.itemQuery) || [];
-			dataQuery.Items.length !== 0 && Alldata.push({ data: dataQuery.Items, Id: "0" });
+			dataQuery.Items.length !== 0 && Alldata.push({ data: dataQuery.Items, Id: 0 });
 
 			// for (let i = 0; i < libdataitem.length; ++i) {
 			// 	let libitem = libdataitem[i];
@@ -512,8 +512,9 @@ class HomeSwiper {
 							let src1 = element.getAttribute("src");
 							if (src1.includes("Backdrop")) {
 								let id = element.getAttribute("id");
-								let parentid = element.getAttribute("data-parentid");
-								let item = this.Alldata.filter(m => m.Id === parentid)[0].data.filter(m => m.Id === id)[0];
+								// let parentid = element.getAttribute("data-parentid");
+								// let item = this.Alldata.filter(m => m.Id === parentid)[0].data.filter(m => m.Id === id)[0];
+								let item = this.Alldata[0].data.filter(m => m.Id === id)[0];
 								let src2 = src1.replace("Backdrop", "Primary").replace(item.BackdropImageTags[0], item.ImageTags.Primary);
 								element.setAttribute('src', src2);
 							}
@@ -525,8 +526,9 @@ class HomeSwiper {
 							let src1 = element.getAttribute("src");
 							if (src1.includes("Primary")) {
 								let id = element.getAttribute("id");
-								let parentid = element.getAttribute("data-parentid");
-								let items = this.Alldata.filter(m => m.Id === parentid)[0];
+								// let parentid = element.getAttribute("data-parentid");
+								// let items = this.Alldata.filter(m => m.Id === parentid)[0];
+								let items = this.Alldata[0];
 								if (items.CollectionType !== "homevideos") {
 									let item = items.data.filter(m => m.Id === id)[0];
 									let src2 = src1.replace("Primary", "Backdrop").replace(item.ImageTags.Primary, item.BackdropImageTags[0]);
