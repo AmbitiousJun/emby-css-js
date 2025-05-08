@@ -24,7 +24,7 @@ class HomeSwiper {
 	static start() {
         CommonUtils.cleanCacheEveryDay();
 
-		this.itemQuery = { ImageTypes: "Primary,Backdrop", EnableImageTypes: "Primary,Backdrop,Banner,Logo", IncludeItemTypes: "Movie,Series,Photo", SortBy: "DateLastContentAdded,SortName", Recursive: true, ImageTypeLimit: 1, Limit: 10, Fields: "Taglines,Overview,ParentId", SortOrder: "Descending", EnableUserData: true, EnableTotalRecordCount: false };
+		this.itemQuery = { ImageTypes: "Primary,Backdrop", EnableImageTypes: "Primary,Backdrop,Banner,Logo", Recursive: true, ImageTypeLimit: 1, Limit: 100, Fields: "Taglines,Overview,ParentId", EnableUserData: true, EnableTotalRecordCount: false };
 		this.backdropOptions = { type: "Backdrop", maxWidth: 3000, adjustForPixelRatio: false };
 		this.logoOptions = { type: "Logo", maxWidth: 500, adjustForPixelRatio: false };
 		this.coverOptions = { type: "Primary", maxWidth: 1000, adjustForPixelRatio: false };
@@ -264,7 +264,7 @@ class HomeSwiper {
 	}
 	static async getItems(query) {
 		if (!sessionStorage.getItem("CACHE|getItems" + (query.ParentId ? query.ParentId : '') + ApiClient.getCurrentUserId() + "-" + ApiClient.serverId())) {
-			const data = JSON.stringify(await ApiClient.getItems(ApiClient.getCurrentUserId(), query));
+			const data = JSON.stringify(await ApiClient.getLatestItems(query));
 			sessionStorage.setItem("CACHE|getItems" + (query.ParentId ? query.ParentId : '') + ApiClient.getCurrentUserId() + "-" + ApiClient.serverId(), data);
 		}
 		return JSON.parse(sessionStorage.getItem("CACHE|getItems" + (query.ParentId ? query.ParentId : '') + ApiClient.getCurrentUserId() + "-" + ApiClient.serverId()));
@@ -276,8 +276,10 @@ class HomeSwiper {
 			let libdataitem = this.user.Policy.EnableAllFolders ? libdata.Items : libdata.Items.filter(m => this.user.Policy.EnabledFolders.includes(m.Guid));
 			let Alldata = [];
 
-			let dataQuery = await this.getItems(this.itemQuery) || [];
-			dataQuery.Items.length !== 0 && Alldata.push({ data: dataQuery.Items, Id: 0 });
+			let dataQuery = await this.getItems(this.itemQuery) || {};
+			const allItems = dataQuery.Items || [];
+			const filterItems = allItems.filter(i => i.Type === "Series" || i.Type === "Movie").slice(0, this.itemQuery.Limit);
+			dataQuery.Items.length !== 0 && Alldata.push({ data: filterItems, Id: 0 });
 
 			// for (let i = 0; i < libdataitem.length; ++i) {
 			// 	let libitem = libdataitem[i];
