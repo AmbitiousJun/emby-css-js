@@ -276,10 +276,9 @@ class HomeSwiper {
 			let libdataitem = this.user.Policy.EnableAllFolders ? libdata.Items : libdata.Items.filter(m => this.user.Policy.EnabledFolders.includes(m.Guid));
 			let Alldata = [];
 
-			let dataQuery = await this.getItems(this.itemQuery) || {};
-			const allItems = dataQuery.Items || [];
+			const allItems = await this.getItems(this.itemQuery) || {};
 			const filterItems = allItems.filter(i => i.Type === "Series" || i.Type === "Movie").slice(0, this.itemQuery.Limit);
-			dataQuery.Items.length !== 0 && Alldata.push({ data: filterItems, Id: 0 });
+			filterItems.length !== 0 && Alldata.push({ data: filterItems, Id: 0 });
 
 			// for (let i = 0; i < libdataitem.length; ++i) {
 			// 	let libitem = libdataitem[i];
