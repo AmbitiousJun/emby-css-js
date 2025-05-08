@@ -28,7 +28,7 @@ class HomeSwiper {
 		this.backdropOptions = { type: "Backdrop", maxWidth: 3000, adjustForPixelRatio: false };
 		this.logoOptions = { type: "Logo", maxWidth: 500, adjustForPixelRatio: false };
 		this.coverOptions = { type: "Primary", maxWidth: 1000, adjustForPixelRatio: false };
-		this.itemQuery.Limit = 15;
+		this.itemQuery.Limit = 100;
 		this.showItemNum = 15;
 		this.loadFlag = false;//是否已经加载
 		this.flag_cssjs = true;//是否是cssjs插件加载，修复cssjs插件加载首次可能不运行的问题
@@ -276,8 +276,8 @@ class HomeSwiper {
 			let libdataitem = this.user.Policy.EnableAllFolders ? libdata.Items : libdata.Items.filter(m => this.user.Policy.EnabledFolders.includes(m.Guid));
 			let Alldata = [];
 
-			const allItems = await this.getItems(this.itemQuery) || {};
-			const filterItems = allItems.filter(i => i.Type === "Series" || i.Type === "Movie").slice(0, this.itemQuery.Limit);
+			const allItems = await this.getItems(this.itemQuery) || [];
+			const filterItems = allItems.filter(i => i.Type === "Series" || i.Type === "Movie").slice(0, this.showItemNum);
 			filterItems.length !== 0 && Alldata.push({ data: filterItems, Id: 0 });
 
 			// for (let i = 0; i < libdataitem.length; ++i) {
