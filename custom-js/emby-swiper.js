@@ -28,7 +28,7 @@ class HomeSwiper {
 		this.backdropOptions = { type: "Backdrop", maxWidth: 3000, adjustForPixelRatio: false };
 		this.logoOptions = { type: "Logo", maxWidth: 500, adjustForPixelRatio: false };
 		this.coverOptions = { type: "Primary", maxWidth: 1000, adjustForPixelRatio: false };
-		this.itemQuery.Limit = 100;
+		this.itemQuery.Limit = 200;
 		this.showItemNum = 15;
 		this.loadFlag = false;//是否已经加载
 		this.flag_cssjs = true;//是否是cssjs插件加载，修复cssjs插件加载首次可能不运行的问题
