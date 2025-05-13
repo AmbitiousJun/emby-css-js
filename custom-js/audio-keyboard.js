@@ -1,3 +1,37 @@
+const showBubble = (value = "") => {
+  let div = document.getElementById("custom-audio-bubble");
+  let append = false;
+  if (!div) {
+    div = document.createElement("div");
+    append = true;
+  }
+  div.id = "custom-audio-bubble";
+  div.style = `
+    position: absolute;
+    right: 20px;
+    top: 100px;
+    transition: .3s;
+    padding: 0 10px;
+    opacity: 100;
+    text-align: center;
+  `;
+  div.className = "dialog";
+  div.innerHTML = `<h2 style="width: 7em;display:flex;align-items:center;justify-content:flex-start">当前音量：${value}</h2>`;
+  append && document.body.appendChild(div);
+  hideBubble(div);
+};
+
+const hideBubble = (() => {
+  let timerId;
+  return (elm) => {
+    if (!elm) {
+      return;
+    }
+    clearTimeout(timerId);
+    timerId = setTimeout(() => elm.style.opacity = "0", 2000);
+  };
+})();
+
 const changeVolume = (stepFunc = () => {}) => {
   const slider = document.querySelector(".emby-slider");
   if (!slider) {
@@ -13,9 +47,9 @@ const changeVolume = (stepFunc = () => {}) => {
       },
     })
   );
+  showBubble(slider.value);
 };
 
-// 监听键盘的 w 键和 s 键调节音量
 document.addEventListener("keydown", (event) => {
   const keyPressed = event.key.toLowerCase();
   if (keyPressed === "w") {
@@ -24,4 +58,3 @@ document.addEventListener("keydown", (event) => {
     changeVolume(HTMLInputElement.prototype.stepDown);
   }
 });
-
