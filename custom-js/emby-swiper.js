@@ -131,68 +131,68 @@ class HomeSwiper {
 				this.mutation?.disconnect();
 				this.swiper2?.disable();
 				this.swiper2?.slides[this.swiper2.activeIndex]?.childNodes[1].swiper?.autoplay.stop();
-				if (e.detail.type === "settings" && e.detail.title === "HeaderHomeScreen") {
+				// if (e.detail.type === "settings" && e.detail.title === "HeaderHomeScreen") {
 
-					if (!e.detail.isRestored) {
-						let swiperLibraryAccess = localStorage.getItem(ApiClient.getCurrentUserId() + "-swiperLibraryAccess");
-						this.user = swiperLibraryAccess ? JSON.parse(swiperLibraryAccess) : { Policy: { EnableAllFolders: true, EnabledFolders: [] } };
-						let selectHomePhotoCarouselHtml = `
-						<div class="verticalSection">
+				// 	if (!e.detail.isRestored) {
+				// 		let swiperLibraryAccess = localStorage.getItem(ApiClient.getCurrentUserId() + "-swiperLibraryAccess");
+				// 		this.user = swiperLibraryAccess ? JSON.parse(swiperLibraryAccess) : { Policy: { EnableAllFolders: true, EnabledFolders: [] } };
+				// 		let selectHomePhotoCarouselHtml = `
+				// 		<div class="verticalSection">
 
-                        <div class="folderAccessContainer">
-                            <h2>轮播图访问</h2>
-                            <label class="checkboxContainer">
-                                <input type="checkbox" is="emby-checkbox" class="chkEnableAllFolders" />
-                                <span>允许访问所有媒体库</span>
-                            </label>
-                            <div class="folderAccessListContainer">
-								<h3 class="checkboxListLabel hide">媒体库</h3>
-                                <div class="folderAccess">
-                                </div>
-                            </div>
-                            <div class="fieldDescription">选择要与轮播图共享的媒体库。</div>
-                        </div>
+                //         <div class="folderAccessContainer">
+                //             <h2>轮播图访问</h2>
+                //             <label class="checkboxContainer">
+                //                 <input type="checkbox" is="emby-checkbox" class="chkEnableAllFolders" />
+                //                 <span>允许访问所有媒体库</span>
+                //             </label>
+                //             <div class="folderAccessListContainer">
+				// 				<h3 class="checkboxListLabel hide">媒体库</h3>
+                //                 <div class="folderAccess">
+                //                 </div>
+                //             </div>
+                //             <div class="fieldDescription">选择要与轮播图共享的媒体库。</div>
+                //         </div>
                         
-                        <br />
-                        <div>
-                            <button is="emby-button" type="submit" class="userLibraryAccessForm raised button-submit block">
-                                <span>保存</span>
-                            </button>
-                        </div>
-						<br />
-						</div>`;
-						var view = e.target;
-						view.children[0].children[0].insertAdjacentHTML('afterbegin', selectHomePhotoCarouselHtml);
-						await ApiClient.getUserViews({}, ApiClient.getCurrentUserId()).then(function (mediaFolders) {
-							mediaFolders = mediaFolders.Items;
-							renderMediaFolders(view, this.user, mediaFolders);
-						}.bind(this));
+                //         <br />
+                //         <div>
+                //             <button is="emby-button" type="submit" class="userLibraryAccessForm raised button-submit block">
+                //                 <span>保存</span>
+                //             </button>
+                //         </div>
+				// 		<br />
+				// 		</div>`;
+				// 		var view = e.target;
+				// 		view.children[0].children[0].insertAdjacentHTML('afterbegin', selectHomePhotoCarouselHtml);
+				// 		await ApiClient.getUserViews({}, ApiClient.getCurrentUserId()).then(function (mediaFolders) {
+				// 			mediaFolders = mediaFolders.Items;
+				// 			renderMediaFolders(view, this.user, mediaFolders);
+				// 		}.bind(this));
 
-						view.querySelector(".chkAllFolder").addEventListener("change", function () {
-							for (var checked = this.checked, elems = view.querySelectorAll('.chkFolder'), i = 0, length = elems.length; i < length; i++)
-								elems[i].checked = checked;
-						});
-						view.querySelector(".chkEnableAllFolders").checked
-							? view.querySelector(".folderAccessListContainer").classList.add("hide")
-							: view.querySelector(".folderAccessListContainer").classList.remove("hide");
-						view.querySelector(".chkEnableAllFolders").addEventListener("change", function () {
-							this.checked
-								? view.querySelector(".folderAccessListContainer").classList.add("hide")
-								: view.querySelector(".folderAccessListContainer").classList.remove("hide");
-						});
+				// 		view.querySelector(".chkAllFolder").addEventListener("change", function () {
+				// 			for (var checked = this.checked, elems = view.querySelectorAll('.chkFolder'), i = 0, length = elems.length; i < length; i++)
+				// 				elems[i].checked = checked;
+				// 		});
+				// 		view.querySelector(".chkEnableAllFolders").checked
+				// 			? view.querySelector(".folderAccessListContainer").classList.add("hide")
+				// 			: view.querySelector(".folderAccessListContainer").classList.remove("hide");
+				// 		view.querySelector(".chkEnableAllFolders").addEventListener("change", function () {
+				// 			this.checked
+				// 				? view.querySelector(".folderAccessListContainer").classList.add("hide")
+				// 				: view.querySelector(".folderAccessListContainer").classList.remove("hide");
+				// 		});
 
-						view.querySelector(".userLibraryAccessForm").addEventListener(
-							"click",
-							function (e) {
-								return (
-									saveUser(this, view),
-									e.preventDefault(),
-									e.stopPropagation(),
-									!1
-								);
-							}.bind(this));
-					}
-				}
+				// 		view.querySelector(".userLibraryAccessForm").addEventListener(
+				// 			"click",
+				// 			function (e) {
+				// 				return (
+				// 					saveUser(this, view),
+				// 					e.preventDefault(),
+				// 					e.stopPropagation(),
+				// 					!1
+				// 				);
+				// 			}.bind(this));
+				// 	}
+				// }
 			}
 
 		}.bind(this));
