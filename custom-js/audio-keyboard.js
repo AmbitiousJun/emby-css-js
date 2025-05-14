@@ -1,3 +1,9 @@
+//
+//  author: @AmbitiousJun
+//    repo: https://github.com/AmbitiousJun/emby-css-js
+// version: v1.0.0
+//
+
 const showBubble = (value = "") => {
   let div = document.getElementById("custom-audio-bubble");
   let append = false;
