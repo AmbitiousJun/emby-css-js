@@ -1,7 +1,7 @@
 //
 //  author: @AmbitiousJun
 //    repo: https://github.com/AmbitiousJun/emby-css-js
-// version: v1.0.0
+// version: v1.1.0
 //
 
 const showBubble = (value = "") => {
@@ -16,14 +16,29 @@ const showBubble = (value = "") => {
     position: absolute;
     right: 2em;
     top: 7em;
-    transition: .3s;
+    transition: .2s;
     padding: 0 10px;
     opacity: 100;
+    transform: translateX(0);
     text-align: center;
   `;
   div.className = "dialog";
-  div.innerHTML = `<h2 style="width: 5em;display:flex;align-items:center;justify-content:flex-start">音量：${value}</h2>`;
+  div.innerHTML = `
+    <h2 style="width: 5em;display:flex;align-items:center;justify-content:flex-start">音量：${value}</h2>
+    <div id="custom-audio-bar" style="width: 95%;border-radius: 10px;transform: translateY(-1em);margin: 0 auto;">
+      <div id="custom-audio-bar__inner" style="width: 0;border: 1.5px solid #fff;border-radius: 10px;"></div>
+    </div>
+  `;
   append && document.body.appendChild(div);
+
+  const bar = document.getElementById("custom-audio-bar");
+  const barInner = document.getElementById("custom-audio-bar__inner");
+  const percent = parseFloat(value);
+  const curWidth = Math.floor(bar.offsetWidth * percent / 100);
+  barInner.style.width = `${curWidth}px`
+  curWidth === 0 && (barInner.style.borderColor = "transparent");
+  curWidth !== 0 && (barInner.style.borderColor = "#fff");
+
   hideBubble(div);
 };
 
@@ -34,7 +49,10 @@ const hideBubble = (() => {
       return;
     }
     clearTimeout(timerId);
-    timerId = setTimeout(() => (elm.style.opacity = "0"), 2000);
+    timerId = setTimeout(() => {
+      elm.style.opacity = "0";
+      elm.style.transform = "translateX(calc(2em + 100%))";
+    }, 2000);
   };
 })();
 
